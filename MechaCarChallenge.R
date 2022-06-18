@@ -13,3 +13,11 @@ total_summary <- mechaCarSusDF%>% summarize(Mean = mean(mechaCarSusDF$PSI), Medi
 #create a lot summary 
 lot_summary <- mechaCarSusDF %>% group_by(Manufacturing_Lot) %>%summarize(Mean = mean(PSI), Median = median(PSI), Variance = var(PSI), SD = sd(PSI), .groups = 'keep')
 
+# T-test on suspension coils
+# Testing to see if Lot1 Coil PSI is significantly different than all lots. (It is not, reject the null hypothesis)
+t.test(subset(mechaCarSusDF, Manufacturing_Lot == "Lot1")$PSI, mu = 1500)
+# Testing to see if Lot2 Coil PSI is significantly different than all lots. (It is not, reject the null hypothesis)
+t.test(subset(mechaCarSusDF, Manufacturing_Lot == "Lot2")$PSI, mu = 1500)
+# Testing to see if Lot3 Coil PSI is significantly different than all lots. (It is, fail to reject the null hypothesis)
+t.test(subset(mechaCarSusDF, Manufacturing_Lot == "Lot3")$PSI, mu = 1500)
+
